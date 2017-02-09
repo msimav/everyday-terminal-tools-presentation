@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Everyday Terminal Tools</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .white {
+        color: white;
+      }
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+        color: #000;
+      }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, white
+background-image: url(http://remark.js.org/asset/cover.jpg)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+# Everyday Terminal Tools
+
+---
+
+layout: false
+.left-column[
+  ## ag
+]
+.right-column[
+## A code searching tool similar to ack, with a focus on speed.
+]
+--
+.right-column[
+```
+$ brew install the_silver_searcher
+```
+]
+
+???
+
+### Basic usage
+```
+$ ag owner
+```
+### gitignore
+```
+$ vim .gitignore  # add spec ignored
+$ ag owner
+```
+### list only files
+```
+$ ag -l owner
+```
+### search in folder
+```
+$ ag owner spec
+```
+### search by file type
+```
+$ ag --ruby owner
+```
+### List known file types
+```
+$ ag --list-file-types
+```
+---
+
+.left-column[
+  ## ag
+  ## httpie
+]
+.right-column[
+## A command line HTTP client with an intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, and more
+]
+--
+.right-column[
+```
+$ brew install httpie
+```
+]
+
+???
+
+* GET
+* POST
+* PUT,DELETE
+* query parameters
+* headers
+* stdin
+* form
+
+---
+
+.left-column[
+  ## ag
+  ## httpie
+  ## jq
+]
+.right-column[
+## A lightweight and flexible command-line JSON processor
+]
+--
+.right-column[
+```
+$ brew install jq
+```
+]
+
+???
+
+### select fields
+```
+$ jq '.json'
+```
+
+### map
+```
+$ jq '.[] | map(.name)' game-of-thrones.json
+```
+
+### build object
+```
+$ jq '{json, form, query}'
+```
+
+### map(select(???))
+```
+$ jq '.[] | map(select(.name == "Starks"))' game-of-thrones.json
+$ jq '.[] | map({name, people: [.people | map(.name)]})' game-of-thrones.json
+```
+
+
+---
+
+.left-column[
+  ## ag
+  ## httpie
+  ## jq
+  ## xargs
+]
+.right-column[
+## Utility that reads space delimited strings from the standard input and executes programs with the strings as arguments.
+]
+
+???
+
+### Basic Usage
+```
+$ ls -l
+$ wc -l app.py ideas.mdown presentation.html
+$ ls | xargs wc -l
+```
+
+### Named arguments -I
+```
+$ ls | xargs -IFILES cp FILES /tmp
+```
+
+### Number of arguments -n
+```
+$ ls | xargs -IFILES cp FILES /tmp
+```
+
+### Parallel execution -p
+```
+$ ls | xargs -n1 -P4
+```
+
+---
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Thats_all_folks.svg/2000px-Thats_all_folks.svg.png)
+background-position: center
+background-repeat: no-repeat
+background-size: contain
+
+</script>
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        slideNumberFormat: '',
+        highlightLanguage: 'bash'
+      });
+    </script>
+  </body>
+</html>
